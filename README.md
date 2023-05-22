@@ -15,6 +15,7 @@ The report seeks to address the following research questions:
 The analysis relies on a comprehensive dataset obtained from the Cyclistic bike sharing program and encompasses various data points after data cleaning which include membership type, rideable type, start day, start month, and ride duration.
 Spanning from January 2022 to December 2022, this dataset consists of 5,596,408 rides and offers a substantial timeframe for examining riders' behaviors and preferences.
 The dataset can be downloaded [here](https://divvy-tripdata.s3.amazonaws.com/index.html)
+
 Remember to adhere to the [Data License Agreement](https://ride.divvybikes.com/data-license-agreement) when working with the data in this project or any data associated with it.
 The dataset forms the foundation of this report and is crucial to understanding the usage patterns and behaviors of Cyclistic bike riders.
 
