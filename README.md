@@ -19,7 +19,7 @@ The dataset can be downloaded [here](https://divvy-tripdata.s3.amazonaws.com/ind
 Remember to adhere to the [Data License Agreement](https://ride.divvybikes.com/data-license-agreement) when working with the data in this project or any data associated with it.
 The dataset forms the foundation of this report and is crucial to understanding the usage patterns and behaviors of Cyclistic bike riders.
 
-## Data Preparation, Cleaning and Transfromation Process
+## Data Preparation, Cleaning and Transformation Process
 Prior to analysis, the dataset was carefully curated and cleaned to ensure that the analysis is based on accurate and reliable data.
 The downloaded dataset was imported into my local SSMS to enable me use SQL queries to carry out further inspection, cleaning and transformation.
 After importing all the data, I utilized an SQL query to create a new table. The dataset from the 12 separate files was inserted into this table, preserving the original raw dataset for future reference.
@@ -43,4 +43,4 @@ While annual members had more rides on weekdays and casual riders on weekends, b
 Based on the findings, recommendations are provided to Cyclistic to optimize their services and attract more casual riders to become annual members.
 Digital media can be effectively utilized to target casual riders and showcase the benefits of annual membership.
 
-The final visuals the dashboard I created can be viewed on my [Power BI Dashboard](https://app.powerbi.com/groups/me/reports/8eb4152e-d64b-40a9-bbd0-5cb4c00a890f/ReportSection).
+The final visuals and the dashboard I created can be viewed on my [Power BI Dashboard](https://app.powerbi.com/groups/me/reports/8eb4152e-d64b-40a9-bbd0-5cb4c00a890f/ReportSection).
