@@ -27,6 +27,7 @@ Additionally, I conducted further data exploration, cleaning, and transformation
 1. Cyclistics create table and insert data
 2. Cyclistic data cleaning
 3. Cyclistic descriptive statistics
+
 To effectively execute the queries yourself, ensure you modify the "FROM" clause in the queries to correspond with the specific location in your locally created database. This adjustment is crucial to successfully execute the query.
 After the data was properly cleaned and transformed, it was ready for analysis and visualization using Power BI to reveal key insights about the data and to draw inference.
 
