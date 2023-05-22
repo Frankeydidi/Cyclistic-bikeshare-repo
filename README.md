@@ -22,7 +22,8 @@ The dataset forms the foundation of this report and is crucial to understanding 
 ## Data Preparation, Cleaning and Transformation Process
 Prior to analysis, the dataset was carefully curated and cleaned to ensure that the analysis is based on accurate and reliable data.
 The downloaded dataset was imported into my local SSMS to enable me use SQL queries to carry out further inspection, cleaning and transformation.
-After importing all the data, I utilized an SQL query to create a new table. The dataset from the 12 separate files was inserted into this table, preserving the original raw dataset for future reference.
+After importing all the data, I utilized an SQL query to create a new table.
+The dataset from the 12 separate files was inserted into this table, preserving the original raw dataset for future reference.
 Additionally, I conducted further data exploration, cleaning, and transformation by running additional queries. To review this step-by-step process, please refer to the files available in the GitHub Project provided in the following order:
 1. Cyclistics create table and insert data
 2. Cyclistic data cleaning
@@ -50,20 +51,4 @@ The final visuals and the dashboard I created can be viewed on my [Power BI Dash
 Annual members vs. casual riders: The dataset consists of 5,596,408 rides, with 3,302,300 (59.01%) of rides taken by annual members and 2,294,108 (40.99%) by casual riders.
 The significant majority of rides are attributed to annual members, suggesting a preference for the convenience and benefits associated with being annual members.
 
-```sql
-CREATE TABLE bikeshare_data (
-    ride_id VARCHAR(50),
-    rideable_type VARCHAR(50),
-    started_at DATETIME,
-    ended_at DATETIME,
-    start_station_name VARCHAR(MAX),
-    start_station_id VARCHAR(50),
-    end_station_name VARCHAR(MAX),
-    end_station_id VARCHAR(50),
-    start_lat FLOAT,
-    start_lng FLOAT,
-    end_lat FLOAT,
-    end_lng FLOAT,
-    member_casual VARCHAR(50)
-)
-```
+
