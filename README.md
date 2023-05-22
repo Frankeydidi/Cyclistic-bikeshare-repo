@@ -50,7 +50,8 @@ The final visuals and the dashboard I created can be viewed on my [Power BI Dash
 Annual members vs. casual riders: The dataset consists of 5,596,408 rides, with 3,302,300 (59.01%) of rides taken by annual members and 2,294,108 (40.99%) by casual riders.
 The significant majority of rides are attributed to annual members, suggesting a preference for the convenience and benefits associated with being annual members.
 
-`CREATE TABLE bikeshare_data (
+```sql
+CREATE TABLE bikeshare_data (
     ride_id VARCHAR(50),
     rideable_type VARCHAR(50),
     started_at DATETIME,
@@ -64,4 +65,5 @@ The significant majority of rides are attributed to annual members, suggesting a
     end_lat FLOAT,
     end_lng FLOAT,
     member_casual VARCHAR(50)
-)`
+)
+```
