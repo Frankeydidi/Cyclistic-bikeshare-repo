@@ -144,12 +144,36 @@ WHERE ride_duration < 1;
 ```
 This approach ensures the dataset remains consistent and aligns with the specific considerations related to ride durations.
 
-I conducted further data exploration, cleaning, and transformation by running additional queries. To review this step-by-step process, please refer to the files available in the GitHub Project provided in the following order:
+- After completing the data cleaning and transformation process while also maintaining data accuracy and integrity, I proceeded to execute a query to generate some descriptive statistics for the dataset based on the membership categories. This step allowed for a comprehensive overview and analysis of key statistical measures within the dataset and provides valuable insights into the distribution and characteristics of the dataset, allowing for a deeper understanding of the membership dynamics.
+```sql
+--Query for some descriptive statistics and grouping by membership type
+
+SELECT 
+	member_casual,
+    COUNT(*) AS num_trips,
+    AVG(ride_duration) AS avg_duration,
+    MIN(ride_duration) AS min_duration,
+    MAX(ride_duration) AS max_duration,
+    (
+        SELECT TOP 1 start_day
+        FROM (
+            SELECT start_day, COUNT(*) AS cnt
+            FROM bikeshare_data
+            GROUP BY start_day
+        ) t
+        ORDER BY cnt DESC
+    ) AS mode_start_day
+FROM bikesharedata
+GROUP BY member_casual;
+```
+
+To review this step-by-step process, please refer to the SQL files available in this GitHub repository provided in the following order:
 1. Cyclistics create table and insert data
 2. Cyclistic data cleaning
 3. Cyclistic descriptive statistics
 
 To effectively execute the queries yourself, ensure you modify the "FROM" clause in the queries to correspond with the specific location in your locally created database. This adjustment is crucial to successfully execute the query.
+
 After the data was properly cleaned and transformed, it was ready for analysis and visualization using Power BI to reveal key insights about the data and to draw inference.
 
 ### Executive Summary
