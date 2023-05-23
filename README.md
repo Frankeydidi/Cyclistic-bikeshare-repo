@@ -134,15 +134,19 @@ SELECT MIN(ride_duration) AS min_trip_duration,
 	MAX(ride_duration) AS max_trip_duration
 FROM bikesharedata
 ```
-![](Images/Screenshot/Screenshot%2023-05-23%170139.jpg)
 
-- To maintain accuracy of the data, I executed a query to delete the rows having ride durations with negative values. However, considering that riders may have availed themselves of full-day passes, ride durations exceeding 24 hours were retained in the final processed dataset.
+![](Images/Screenshot/Screenshot%202023-05-23%20170139.jpg)
+
+- To maintain accuracy of the data, I executed a query to delete the rows having ride durations with negative values. This resulted in 71,309 rows being deleted from the data. However, considering that riders may have availed themselves of full-day passes, ride durations exceeding 24 hours were retained in the final processed dataset.
 ```sql
 --Deleting entries with ride duration less than one minute
 
 DELETE FROM bikesharedata
 WHERE ride_duration < 1;
 ```
+
+![](Images/Screenshot/Screenshot%202023-05-23%20170303.jpg)
+
 This approach ensures the dataset remains consistent and aligns with the specific considerations related to ride durations.
 
 - After completing the data cleaning and transformation process while also maintaining data accuracy and integrity, I proceeded to execute a query to generate some descriptive statistics for the dataset based on the membership categories. This step allowed for a comprehensive overview and analysis of key statistical measures within the dataset and provides valuable insights into the distribution and characteristics of the dataset, allowing for a deeper understanding of the membership dynamics.
@@ -167,6 +171,8 @@ SELECT
 FROM bikesharedata
 GROUP BY member_casual;
 ```
+
+![](Images/Screenshot/Screenshot%202023-05-23%20170716.jpg)
 
 To review this step-by-step process, please refer to the SQL files available in this GitHub repository provided in the following order:
 1. Cyclistics create table and insert data
@@ -197,11 +203,15 @@ The final visuals and the dashboard I created can be viewed on my [Power BI Dash
 - The dataset consists of 5,596,408 rides, with 3,302,300 (59.01%) of rides taken by annual members and 2,294,108 (40.99%) by casual riders.
 - The significant majority of rides are attributed to annual members, suggesting a preference for the convenience and benefits associated with being annual members.
 
+![](Images/plots%20and%20graphs/n3vpovjj.png)
+
 2. **Bike rideable types:**
 - The majority of classic bike rides are taken by both casual riders and members making it the most popular among both rider classes.
 - On the other hand, the docked bike rideable type is primarily used by casual riders. 
 - Electric bikes, however, are utilized by both casual riders and members, but there is a higher proportion of casual riders using electric bikes.
 - This indicates that annual members may have a preference for a more traditional and stable bike option, while casual riders are more open to trying newer and more innovative rideable types.
+
+![](Images/plots%20and%20graphs/ukpsvnjl.png)
 
 3. **Daily rides and average ride duration:**
 - Annual members generally had higher number of rides on weekdays while casual riders had more rides on weekend days.
@@ -209,13 +219,21 @@ The final visuals and the dashboard I created can be viewed on my [Power BI Dash
 - Weekend days (Saturday and Sunday) generally have higher ride durations for both casual riders and annual members.
 - These variations across different days of the week suggest potential factors influencing daily rides and ride duration for both annual members and casual riders.
 
+![](Images/plots%20and%20graphs/g5xcj9uc.png)
+
+![](Images/plots%20and%20graphs/e9gswh7f.png)
+
 4. **Start time trend:**
 - Analysis of the bike sharing data reveals that more rides are start between 8 AM to 7 PM and reaches a peak number of rides at 5 PM for both annual members and casual riders, indicating a common pattern of high demand during the evening hours.
 - This finding suggests that many riders utilize the Cyclistic bikes for commuting or recreational purposes after work.
 
+![](Images/plots%20and%20graphs/rfmejdmh.png)
+
 5. **Monthly rides:**
 - The months with the highest ride counts for both casual riders and annual members are May, June, July, and August.
 - Annual members consistently have higher ride counts than casual riders across all months.
+
+![](Images/plots%20and%20graphs/uxlqcftx.png)
 
 ### Recommendations
 1. Encourage casual riders to become annual members:
@@ -229,3 +247,9 @@ The final visuals and the dashboard I created can be viewed on my [Power BI Dash
 3. Targeted digital media campaigns:
 - Utilize digital marketing channels to promote the advantages of annual memberships, targeting casual riders through social media, email marketing, and online advertisements.
 - Share success stories or testimonials from satisfied annual members to create a sense of community and inspire casual riders to become members.
+
+### Conclusion
+The analysis of Cyclistic bike sharing program data reveals valuable insights into the usage patterns and behaviors of annual members and casual riders. Annual membership is preferred by the majority of riders, and there are distinct differences in rideable types used by each group.
+The analysis of ride durations by day of the week and start month further highlights variations in riding habits.
+By utilizing the key insights and recommendations provided in this report, Cyclistic can optimize its services, attract more casual riders to become annual members, and continue to provide an exceptional bike-sharing experience.
+
