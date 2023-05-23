@@ -134,6 +134,7 @@ SELECT MIN(ride_duration) AS min_trip_duration,
 	MAX(ride_duration) AS max_trip_duration
 FROM bikesharedata
 ```
+![](Images/Screenshot/Screenshot%2023-05-23%170139.jpg)
 
 - To maintain accuracy of the data, I executed a query to delete the rows having ride durations with negative values. However, considering that riders may have availed themselves of full-day passes, ride durations exceeding 24 hours were retained in the final processed dataset.
 ```sql
