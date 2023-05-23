@@ -4,27 +4,147 @@ This project is a case study I did using both Microsoft SQL Server and Power BI.
 I carried out analysis on this case study to improve my skills as a data analyst and also as part of the requirements to obtain my Google Data Analytics Professional Certification.
 
 ### Introduction
-The purpose of this report is to analyze and provide insights into the usage patterns and behaviors of Cyclistic bike riders, with specific focus on the differences between annual members and casual riders.
-The analysis utilizes data from Cyclistic's bike sharing program and employs **Microsoft SQL Server (SSMS)** and **Power BI.**
+The purpose of this report is to analyze and provide insights into the usage patterns and behaviours of Cyclistic bike riders, with specific focus on the differences between annual members and casual riders.
+The analysis utilizes data from Cyclistic's bike sharing program and employs **Microsoft SQL Server (SSMS)** and **Power BI** tools.
 The report seeks to address the following research questions:
 1. How do annual members and casual riders use Cyclistic bikes differently?
 2. Why would casual riders buy Cyclistic annual memberships?
 3. How can Cyclistic use digital media to influence casual riders to become members?
 
 ### The Data
-The analysis relies on a comprehensive dataset obtained from the Cyclistic bike sharing program and encompasses various data points after data cleaning which include membership type, rideable type, start day, start month, and ride duration.
-Spanning from January 2022 to December 2022, this dataset consists of 5,596,408 rides and offers a substantial timeframe for examining riders' behaviors and preferences.
+The analysis relies on a comprehensive dataset obtained from the Cyclistic bike sharing program and encompasses various data points which after data cleaning include membership type, rideable type, start day, start month, and ride duration.
+Cvering the period from January 2022 to December 2022, this data comprises 12 individual files - each file for a specific month - and offers a substantial timeframe for examining riders' behaviors and preferences.
 The dataset can be downloaded [here](https://divvy-tripdata.s3.amazonaws.com/index.html)
 
 Remember to adhere to the [Data License Agreement](https://ride.divvybikes.com/data-license-agreement) when working with the data in this project or any data associated with it.
-The dataset forms the foundation of this report and is crucial to understanding the usage patterns and behaviors of Cyclistic bike riders.
+#### Observations on the data
+- In the data files, there are 13 columns namely: ride_id, rideable_type, started_at, ended_at, start_station_name, end_station_name, start_station_id, end_station_id, start_station, start_lat, start_lng, end_lat, end_lng and member_casual.
+- The "started_at" and "ended_at" columns contain date-time data in YYYY-MM-DD HH:MM:SS format.
+- "start_station_id" and "end_station_id" have discrepancy. Some of the IDs contain alphabets at the beginning (12 char length) and some contain only numbers (variable length 3-8).
+- Certain CSV files have considerable amount of missing information in the "start_station_name", "start_station_id", "end_station_name" and "end_station_id" columns.
+- "member_casual" column contains 2 types of membership data: "member" or "casual".
+
+The dataset forms the foundation of this report and is crucial to understanding the usage patterns and behaviours of Cyclistic bike riders.
 
 ### Data Preparation, Cleaning and Transformation Process
 Prior to analysis, the dataset was carefully curated and cleaned to ensure that the analysis is based on accurate and reliable data.
 The downloaded dataset was imported into my local SSMS to enable me use SQL queries to carry out further inspection, cleaning and transformation.
-After importing all the data, I utilized an SQL query to create a new table.
-The dataset from the 12 separate files was inserted into this table, preserving the original raw dataset for future reference.
-Additionally, I conducted further data exploration, cleaning, and transformation by running additional queries. To review this step-by-step process, please refer to the files available in the GitHub Project provided in the following order:
+- After importing all the data, I utilized an SQL query to create a new table.
+```sql
+CREATE TABLE bikesharedata (
+    ride_id VARCHAR(50),
+    rideable_type VARCHAR(50),
+    started_at DATETIME,
+    ended_at DATETIME,
+    start_station_name VARCHAR(MAX),
+    start_station_id VARCHAR(50),
+    end_station_name VARCHAR(MAX),
+    end_station_id VARCHAR(50),
+    start_lat FLOAT,
+    start_lng FLOAT,
+    end_lat FLOAT,
+    end_lng FLOAT,
+    member_casual VARCHAR(50)
+)
+```
+- The dataset from the 12 individual files was then inserted into this new table, ensuring the preservation of the initial data for future reference purposes. The table now consisted of 5,667,717 rows of data in total.
+```sql
+INSERT INTO bikesharedata
+SELECT * FROM divvy01
+UNION ALL
+SELECT * FROM divvy02
+UNION ALL
+SELECT * FROM divvy03
+UNION ALL
+SELECT * FROM divvy04
+UNION ALL
+SELECT * FROM divvy05
+UNION ALL
+SELECT * FROM divvy06
+UNION ALL
+SELECT * FROM divvy07
+UNION ALL
+SELECT * FROM divvy08
+UNION ALL
+SELECT * FROM divvy09
+UNION ALL
+SELECT * FROM divvy10
+UNION ALL
+SELECT * FROM divvy11
+UNION ALL
+SELECT * FROM divvy12
+```
+- In an effort to create a more comprehensive and streamlined table, adjustments were made to exclude irrelevant columns and missing row information.
+The "ride_id" column, which was not identified as a primary key during evaluation, was dropped from the table.
+The columns "start_lat," "start_lng," "end_lat," and "end_lng" were excluded as they were deemed unnecessary for the analysis.
+Due to a significant number of missing row information, the "start_station_name," "start_station_id," "end_station_name," and "end_station_id" columns were removed from the table.
+
+These modifications were implemented to ensure a more concise and relevant representation of the data in line with the research questions that needed to be answered.
+```sql
+-- Dropping/deleting columns not needed for this analysis
+
+ALTER TABLE
+bikesharedata
+DROP COLUMN ride_id,
+            start_station_name,
+            start_station_id,
+            end_station_name,
+            end_station_id,
+            start_lat,
+            start_lng,
+            end_lat,
+            end_lng
+```
+- Additionally,  to facilitate and address the specific research questions that initiated this analysis, several new columns were incorporated into the table, each assigned with its respective required data type.
+These additional columns include: "start_day," "start_month," "end_day," "end_month," "start_time," "end_time," and "ride_duration."
+By introducing these new columns, we aim to enhance the depth of our analysis and derive meaningful insights from the data.
+```sql
+--Adding new columns required for this analysis to the table
+
+ALTER TABLE
+bikesharedata
+ADD start_day VARCHAR(50),
+    start_month VARCHAR(50),
+    end_day VARCHAR(50),
+    end_month VARCHAR(50),
+    start_time TIME,
+    end_time TIME,
+    ride_duration INT;
+```
+- The required data for the new columns was derived from the existing information within the remaining columns of the table.
+By leveraging the available data, we were able to extract and calculate the necessary information to populate the new columns effectively. This approach allowed us to avoid any potential data discrepancies that may have arisen from external sources and ensured the accuracy and consistency of the new data.
+```sql
+--Update of the newly added columns with their required data
+
+UPDATE bikesharedata
+SET start_day = DATENAME(dw, started_at),
+    start_month = DATENAME(mm, started_at),
+    end_day = DATENAME(dw, ended_at),
+    end_month = DATENAME(mm, ended_at),
+    start_time = CONVERT(time, started_at),
+    end_time = CONVERT(time, ended_at),
+    ride_duration = DATEDIFF(minute,started_at,ended_at);
+```
+- After obtaining the refined and consolidated table essential for our analysis, I executed a query to examine the data within the "ride_duration" column. Notably, I observed that the minimum ride duration displayed a negative value, while the maximum ride duration exceeded 24 hours (1440 minutes).
+This observation suggests the presence of both negative ride durations and durations surpassing 24 hours in the data.
+```sql
+--Running a query to explore the data in the ride_duration column
+
+SELECT MIN(ride_duration) AS min_trip_duration,
+	MAX(ride_duration) AS max_trip_duration
+FROM bikesharedata
+```
+
+- To maintain accuracy of the data, I executed a query to delete the rows having ride durations with negative values. However, considering that riders may have availed themselves of full-day passes, ride durations exceeding 24 hours were retained in the final processed dataset.
+```sql
+--Deleting entries with ride duration less than one minute
+
+DELETE FROM bikesharedata
+WHERE ride_duration < 1;
+```
+This approach ensures the dataset remains consistent and aligns with the specific considerations related to ride durations.
+
+I conducted further data exploration, cleaning, and transformation by running additional queries. To review this step-by-step process, please refer to the files available in the GitHub Project provided in the following order:
 1. Cyclistics create table and insert data
 2. Cyclistic data cleaning
 3. Cyclistic descriptive statistics
