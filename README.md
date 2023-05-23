@@ -1,7 +1,7 @@
 # Cyclistic Bikeshare: Converting Casual Riders to Members (A Capstone Project)
 
-This project is a case study I did using both Microsoft SQL Server and Power BI.
-I carried out analysis on this case study to improve my skills as a data analyst and also as part of the requirements to obtain my Google Data Analytics Professional Certification.
+This project serves as a comprehensive case study that I undertook utilizing Microsoft SQL Server (SSMS) and Power BI.
+I carried out this project to enhance my proficiency as a data analyst while fulfilling the requirements to attain the Google Data Analytics Professional Certification. 
 
 ### Introduction
 The purpose of this report is to analyze and provide insights into the usage patterns and behaviours of Cyclistic bike riders, with specific focus on the differences between annual members and casual riders.
